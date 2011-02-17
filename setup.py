@@ -7,16 +7,17 @@ except ImportError:
 
 setup(
     name='SimpleSite',
-    version='0.1',
+    version='0.3.0',
     description='',
-    author='',
-    author_email='',
+    author='saguitarius',
+    author_email='saguitarius@gmail.com',
     url='',
     install_requires=[
         "Pylons>=1.0",
         "SQLAlchemy>=0.5,<=0.5.99",
-        "Mako",
+        "Mako>=0.2.2,<=0.2.99",
         "FormBuild>=2.0,<2.99",
+        "AuthKit>=0.4.3,<=0.4.99",
     ],
     setup_requires=["PasteScript>=1.6.3"],
     packages=find_packages(exclude=['ez_setup']),

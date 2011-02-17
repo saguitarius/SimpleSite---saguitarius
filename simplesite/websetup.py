@@ -26,6 +26,7 @@ def setup_app(command, conf, vars):
     log.info("Adding the AuthKit model...")
     users = UsersFromDatabase(model)
     meta.metadata.create_all(checkfirst=True)
+    
     log.info("Adding roles and uses...")
     users.role_create("delete")
     users.user_create("foo", password="bar")

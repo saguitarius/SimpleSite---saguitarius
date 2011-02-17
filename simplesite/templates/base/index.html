@@ -9,12 +9,19 @@
     ${self.head()}
     ${self.js()}
 </head>
-<body>
+<body class="yui-skin-sam">
     <div id="doc3" class="yui-t5">
         <div id="hd">
              <div class="yui-gc">
                  <div class="yui-u first">${self.heading()}</div>
-                 <div class="yui-u"></div>
+                 <div class="yui-u">
+                    % if h.auth.authorized(h.auth.is_valid_user) and not (request.urlvars['controller'] == 'account' and request.urlvars['action'] in ['signout', 'signinagain']):
+                        <p>Signed in as ${request.environ['REMOTE_USER']},
+                        <a href="${h.url('signout')}">Sign out</a></p>
+                    % else:
+                        <p><a href="${h.url('signin')}">Sign in</a></p>
+                    % endif
+                 </div>
              </div>
             ${self.header()}
             ${self.tabs()}
@@ -68,7 +75,10 @@
 </%def>
 
 <%def name="footer()">
-    <p><a href="#top">Top ^</a></p>
+    <p>
+        <a href="${h.url('/')}">[Home]</a> |
+        <a href="#top">Top ^</a>
+    </p>
 </%def>
 
 <%def name="flash()">

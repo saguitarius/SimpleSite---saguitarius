@@ -3,7 +3,12 @@
 <%def name="title()">${c.page.title}</%def>
 <%def name="heading()"><h1>${c.page.heading or c.page.title}</h1></%def>
 
-${c.page.content}
+<%!
+    from webhelpers.html import literal
+%>
+<div id="page-content">
+${literal(c.page.content)}
+</div>
 
 <%def name="tags(available_tags)">
     <h2>Tags</h2>
@@ -28,28 +33,47 @@ ${literal(htmlfill.render(capture(self.tags, c.available_tags), c.selected_tags)
 <%def name="footer()">
 ## Then add our page links
 <p>
-  <a href="${h.url(controller='page', action='list')}">All Pages</a>
-| <a href="${h.url(controller='page', action='new')}">New Page</a>
-| <a href="${h.url(controller='page', action='edit', id=c.page.id)}">Edit Page</a>
-| <a href="${h.url(controller='page', action='delete', id=c.page.id)}">Delete Page</a>
+% if h.auth.authorized(h.auth.has_delete_role):
+  <a href="${h.url(controller='page', action='list')}">All Pages</a> |
+% endif
+<a href="${h.url(controller='page', action='new', section=c.page.section,
+before=c.page.before)}">New Page</a>
+% if h.auth.authorized(h.auth.is_valid_user):
+| <a href="${h.url(controller='page', action='edit', id=c.page.id)}">Edit
+Page</a>
+% endif
+% if h.auth.authorized(h.auth.has_delete_role):
+| <a href="${h.url(controller='page', action='delete', id=c.page.id)}">Delete
+Page</a>
+% endif
 </p>
 ## Comment links
 <p>
-  <a href="${h.url(pageid=c.page.id, controller='comment',
-action='list')}">Comments (${str(c.comment_count)})</a>
-| <a href="${h.url(pageid=c.page.id, controller='comment',
-action='new')}">Add Comment</a>
+  <a href="${h.url(pageid=c.page.id, controller='comment', action='list')}"
+>Comments (${str(c.comment_count)})</a>
+| <a href="${h.url(pageid=c.page.id, controller='comment', action='new')}"
+>Add Comment</a>
 </p>
 ## Section links
 <p>
-  <a href="${h.url(controller='section', action='new', section=c.page.section, before=c.page.before)}">New Section</a>
-| <a href="${h.url(controller='section', action='edit', id=c.page.section)}">Edit Section</a>
-| <a href="${h.url(controller='section', action='delete', id=c.page.section)}">Delete Section and Index Page</a>
+  <a href="${h.url(controller='section', action='new', section=c.page.section,
+before=c.page.before)}">New Section</a>
+% if h.auth.authorized(h.auth.is_valid_user):
+| <a href="${h.url(controller='section', action='edit', id=c.page.section)}"
+>Edit Section</a>
+% endif
+% if h.auth.authorized(h.auth.has_delete_role):
+| <a href="${h.url(controller='section', action='delete', id=c.page.section)}"
+>Delete Section and Index Page</a>
+% endif
 </p>
-
 ## Tag links
-<p><a href="${h.url(controller='tag', action='list')}">All Tags</a>
-| <a href="${h.url(controller='tag', action='new')}">Add Tag</a></p>
+<p>
+% if h.auth.authorized(h.auth.has_delete_role):
+<a href="${h.url(controller='tag', action='list')}">All Tags</a>
+|
+% endif
+<a href="${h.url(controller='tag', action='new')}">Add Tag</a></p>
 ## Include the parent footer too
 ${parent.footer()}
 </%def>

@@ -4,13 +4,13 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1297711303.7390001
+_modified_time = 1297970130.7539999
 _template_filename='D:\\PyProjects\\SimpleSite\\simplesite\\templates/derived/page/edit.html'
 _template_uri='/derived/page/edit.html'
 _template_cache=cache.Cache(__name__, _modified_time)
 _source_encoding='utf-8'
 from webhelpers.html import escape
-_exports = ['heading', 'js']
+_exports = ['head', 'heading', 'js']
 
 
 def _mako_get_namespace(context, name):
@@ -68,6 +68,30 @@ def render_body(context,**pageargs):
         __M_writer(u'\r\n\r\n')
         # SOURCE LINE 16
         __M_writer(u'\r\n\r\n')
+        # SOURCE LINE 52
+        __M_writer(u'\r\n\r\n')
+        return ''
+    finally:
+        context.caller_stack._pop_frame()
+
+
+def render_head(context):
+    context.caller_stack._push_frame()
+    try:
+        _import_ns = {}
+        _mako_get_namespace(context, u'fields')._populate(_import_ns, [u'*'])
+        _mako_get_namespace(context, u'navfields')._populate(_import_ns, [u'js'])
+        h = _import_ns.get('h', context.get('h', UNDEFINED))
+        parent = _import_ns.get('parent', context.get('parent', UNDEFINED))
+        __M_writer = context.writer()
+        # SOURCE LINE 54
+        __M_writer(u'\r\n    ')
+        # SOURCE LINE 55
+        __M_writer(escape(parent.head()))
+        __M_writer(u'\r\n    ')
+        # SOURCE LINE 56
+        __M_writer(escape(h.stylesheet_link(h.url('/yui/2.8.2/assets/skins/sam/skin.css'))))
+        __M_writer(u'\r\n')
         return ''
     finally:
         context.caller_stack._pop_frame()
@@ -107,7 +131,7 @@ def render_js(context):
         __M_writer(u'\r\n    ')
         # SOURCE LINE 20
         __M_writer(escape(navfields.js()))
-        __M_writer(u'\r\n')
+        __M_writer(u'\r\n\r\n    <script type="text/javascript"\r\n        src="/yui/2.8.2/element/element-min.js"></script>\r\n    <script type="text/javascript"\r\n        src="/yui/2.8.2/container/container_core-min.js"></script>\r\n    <script type="text/javascript"\r\n        src="/yui/2.8.2/editor/simpleeditor-min.js"></script>\r\n\r\n    <script type="text/javascript">\r\n    (function() {\r\n        // Set up some private variables\r\n        var Dom = YAHOO.util.Dom;\r\n        var Event = YAHOO.util.Event;\r\n\r\n        // The SimpleEditor config\r\n        var myConfig = {\r\n            height: \'200px\',\r\n            width: \'630px\',\r\n            dompath: true,\r\n            focusAtStart: true,\r\n            handleSubmit: true\r\n        };\r\n\r\n        // Now let\'s load the SimpleEditor..\r\n        var myEditor = new YAHOO.widget.SimpleEditor(\'editor\', myConfig);\r\n        myEditor._defaultToolbar.buttonType = \'advanced\';\r\n        document.e = myEditor;\r\n        myEditor._defaultToolbar.titlebar = \'Rich Text Editor\';\r\n        myEditor.render();\r\n    })();\r\n    </script>\r\n')
         return ''
     finally:
         context.caller_stack._pop_frame()

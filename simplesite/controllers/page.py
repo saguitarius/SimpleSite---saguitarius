@@ -17,6 +17,8 @@ import webhelpers.paginate as paginate
 from sqlalchemy import delete
 from simplesite.controllers.nav import NewNavForm, ValidBefore
 
+from authkit.authorize.pylons_adaptors import authorize
+
 log = logging.getLogger(__name__)
 
 class ValidTags(formencode.FancyValidator):
@@ -116,6 +118,7 @@ class PageController(BaseController):
         # Issue an HTTP redirect
         return h.redirect(url('path', id=page.id))
     
+    @authorize(h.auth.is_valid_user)
     def edit(self, id=None):
         if id is None:
             abort(404)
@@ -138,6 +141,7 @@ class PageController(BaseController):
         c.before_options.append(['', '[At the end]'])
         return htmlfill.render(render('/derived/page/edit.html'), values)
     
+    @authorize(h.auth.is_valid_user)
     @restrict('POST')
     @validate(schema=NewPageForm(), form='edit')
     def save(self, id=None):
@@ -159,6 +163,7 @@ class PageController(BaseController):
         # Issue an HTTP redirect
         return h.redirect(url('path', id=page.id))
     
+    @authorize(h.auth.has_delete_role)
     def list(self):
         records = meta.Session.query(model.Page)
         c.paginator = paginate.Page(
@@ -170,6 +175,7 @@ class PageController(BaseController):
         )
         return render('/derived/page/list.html')
     
+    @authorize(h.auth.has_delete_role)
     def delete(self, id=None):
         if id is None:
             abort(404)

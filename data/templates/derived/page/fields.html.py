@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1297684442.671
+_modified_time = 1297969789.6689999
 _template_filename=u'D:\\PyProjects\\SimpleSite\\simplesite\\templates/derived/page/fields.html'
 _template_uri=u'/derived/page/fields.html'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -57,9 +57,9 @@ def render_body(context,**pageargs):
         # SOURCE LINE 16
         __M_writer(escape(h.field(
     "Content",
-    h.textarea(name='content', rows=7, cols=40),
+    h.textarea(name='content', rows=7, cols=40, id='editor'),
     required=True,
-    field_desc = 'The text that will make up the body of the page'
+    field_desc = 'The text which will make up the body of the page'
 )))
         return ''
     finally:

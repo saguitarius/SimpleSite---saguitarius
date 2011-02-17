@@ -5,6 +5,8 @@ from pylons.middleware import error_document_template
 from webhelpers.html.builder import literal
 
 from simplesite.lib.base import BaseController
+from pylons import tmpl_context as c
+from simplesite.lib.base import render
 
 class ErrorController(BaseController):
     """Generates error documents as and when they are required.
@@ -25,7 +27,12 @@ class ErrorController(BaseController):
             dict(prefix=request.environ.get('SCRIPT_NAME', ''),
                  code=cgi.escape(request.GET.get('code', str(resp.status_int))),
                  message=content)
-        return page
+        
+        c.code = code
+        c.message = content
+        return render('/derived/error/document.html')
+        #return page
+
 
     def img(self, id):
         """Serve Pylons' stock images"""
