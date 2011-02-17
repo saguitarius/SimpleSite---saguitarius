@@ -1,0 +1,21 @@
+<%inherit file="/base/index.html" />
+<%namespace file="fields.html" name="fields" import="*"/>
+
+<%def name="heading()">
+    <h1 class="main">Editing ${c.section.name}</h1>
+</%def>
+
+<p>Editing the source code for the ${c.section.name} section:</p>
+
+${h.form_start(h.url(controller='section', action='save',
+    id=request.urlvars['id']), method="post")}
+    ${fields.body()}
+    ${h.field(field=h.submit(value="Save Changes", name='submit'))}
+${h.form_end()}
+
+<%namespace file="/derived/nav/fields.html" name="navfields" import="js"/>
+
+<%def name="js()">
+    ${parent.js()}
+    ${navfields.js()}
+</%def>

@@ -1,0 +1,164 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Documentation &mdash; SimpleSite v0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="SimpleSite v0.1.0 documentation" href="index.html" />
+    <link rel="prev" title="Developer Guide" href="developer_guide.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developer_guide.html" title="Developer Guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">SimpleSite v0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="api-documentation">
+<h1>API Documentation<a class="headerlink" href="#api-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This page contains some basic documentation for the SimpleSite project. To
+understand the project completely please refer to the documentation on the
+Pylons Book website at <a class="reference external" href="http://pylonsbook.com">http://pylonsbook.com</a> or read the source code directly.</p>
+<div class="section" id="module-simplesite">
+<span id="the-simplesite-module"></span><h2>The <a class="reference internal" href="#module-simplesite" title="simplesite"><tt class="xref py py-mod docutils literal"><span class="pre">simplesite</span></tt></a> Module<a class="headerlink" href="#module-simplesite" title="Permalink to this headline">¶</a></h2>
+<p>Contains all the controllers, model and templates as sub-modules.</p>
+</div>
+<div class="section" id="module-simplesite.controllers">
+<span id="the-controllers-module"></span><h2>The <tt class="xref py py-mod docutils literal"><span class="pre">controllers</span></tt> Module<a class="headerlink" href="#module-simplesite.controllers" title="Permalink to this headline">¶</a></h2>
+<p>Contains all the controllers. The most important of which is
+<a class="reference internal" href="#simplesite.controllers.PageController" title="simplesite.controllers.PageController"><tt class="xref py py-class docutils literal"><span class="pre">PageController</span></tt></a>.</p>
+<dl class="class">
+<dt id="simplesite.controllers.PageController">
+<em class="property">class </em><tt class="descclassname">simplesite.controllers.</tt><tt class="descname">PageController</tt><a class="headerlink" href="#simplesite.controllers.PageController" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>The <a class="reference internal" href="#simplesite.controllers.PageController" title="simplesite.controllers.PageController"><tt class="xref py py-class docutils literal"><span class="pre">PageController</span></tt></a> is responsible for displaying pages as well as
+allowing users to add, edit, delete and list pages.</p>
+<dl class="method">
+<dt id="simplesite.controllers.PageController.view">
+<tt class="descclassname">PageController.</tt><tt class="descname">view</tt><big>(</big><em>self</em><span class="optional">[</span>, <em>id=None</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#simplesite.controllers.PageController.view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p>When a user visits a URL such as <tt class="docutils literal"><span class="pre">/view/page/1</span></tt> the <a class="reference internal" href="#simplesite.controllers.PageController" title="simplesite.controllers.PageController"><tt class="xref py py-class docutils literal"><span class="pre">PageController</span></tt></a>
+class&#8217;s <tt class="xref py py-meth docutils literal"><span class="pre">view()</span></tt> action is called to render the page.</p>
+<p>The page controller makes use of a FormEncode schema to validate the page
+data it receives. Here is the schema it uses:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">NewPageForm</span><span class="p">(</span><span class="n">formencode</span><span class="o">.</span><span class="n">Schema</span><span class="p">):</span>
+    <span class="n">allow_extra_fields</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">filter_extra_fields</span> <span class="o">=</span> <span class="bp">True</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">formencode</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">String</span><span class="p">(</span>
+        <span class="n">not_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">{</span>
+            <span class="s">&#39;empty&#39;</span><span class="p">:</span><span class="s">&#39;Please enter some content for the page. &#39;</span>
+        <span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">heading</span> <span class="o">=</span> <span class="n">formencode</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">String</span><span class="p">()</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">formencode</span><span class="o">.</span><span class="n">validators</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="n">not_empty</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As you can see the schema includes validators for the title, heading
+and content.</p>
+</div>
+<div class="section" id="module-simplesite.lib.helpers">
+<span id="the-helpers-module"></span><h2>The <tt class="xref py py-mod docutils literal"><span class="pre">helpers</span></tt> Module<a class="headerlink" href="#module-simplesite.lib.helpers" title="Permalink to this headline">¶</a></h2>
+<p>Helper functions</p>
+<p>Consists of functions to typically be used within templates, but also
+available to Controllers. This module is available to templates as &#8216;h&#8217;.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">API Documentation</a><ul>
+<li><a class="reference internal" href="#module-simplesite">The <tt class="docutils literal"><span class="pre">simplesite</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-simplesite.controllers">The <tt class="docutils literal"><span class="pre">controllers</span></tt> Module</a></li>
+<li><a class="reference internal" href="#module-simplesite.lib.helpers">The <tt class="docutils literal"><span class="pre">helpers</span></tt> Module</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="developer_guide.html"
+                        title="previous chapter">Developer Guide</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="developer_guide.html" title="Developer Guide"
+             >previous</a> |</li>
+        <li><a href="index.html">SimpleSite v0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Andrey.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
