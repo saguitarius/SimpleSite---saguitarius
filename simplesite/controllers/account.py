@@ -15,7 +15,15 @@ import formencode
 from formencode import htmlfill
 from pylons.decorators import validate
 
+from formencode.schema import Schema
+from formencode.validators import Invalid, FancyValidator
+from formencode.validators import Int, DateConverter, String, OneOf
+from formencode import variabledecode
+from formencode.foreach import ForEach
+from formencode.api import NoDefault
+
 log = logging.getLogger(__name__)
+
 
 class RegistrationForm(formencode.Schema):
     allow_extra_fields = True
@@ -54,6 +62,22 @@ class AccountController(BaseController):
     @validate(schema=RegistrationForm(), form='register_form', auto_error_formatter=custom_formatter)
     def register(self):
         users = request.environ['authkit.users']
-        users.user_create(self.form_result['username'], password=self.form_result['password'])
-        meta.Session.commit()
-        return render('/derived/account/register.html')
+        if not users.user_exists(self.form_result['username']):
+            users.user_create(self.form_result['username'], password=self.form_result['password'])
+            meta.Session.commit()
+            return render('/derived/account/register.html')
+        else:
+            c.username = self.form_result['username']
+            return render('/derived/account/register.html')
+        
+    def manage_accounts(self):
+        users = request.environ['authkit.users']
+        c.list_users = users.list_users()
+        c.list_groups = users.list_groups()
+        c.list_roles = users.list_roles()
+        return render('/derived/account/manage_accounts.html')
+    
+    def delete_user(username):
+        users = request.environ['authkit.users']
+        users.user_delete(request.params['username'])
+        redirect(url(h.url(controller='account', action='manage_accounts')))

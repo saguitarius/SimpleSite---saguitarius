@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1298024457.4920001
+_modified_time = 1298029148.9100001
 _template_filename=u'D:\\PyProjects\\SimpleSite\\simplesite\\templates/derived/account/fields.html'
 _template_uri=u'/derived/account/fields.html'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -30,7 +30,7 @@ def render_body(context,**pageargs):
         # SOURCE LINE 6
         __M_writer(escape(h.field(
     "Password",
-    h.text(name='password'),
+    h.password(name='password'),
     required=True,
 )))
         return ''

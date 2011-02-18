@@ -142,7 +142,6 @@ def make_map(config):
 
     # CUSTOM ROUTES HERE
     
-    map.connect('register', '/register', controller='account', action='register_form')
     map.connect('signout', '/signout', controller='account', action='signout')
     map.connect('signin', '/signin', controller='account', action='signin')
     map.connect('signinagain', '/signinagain', controller='account', action='signinagain')

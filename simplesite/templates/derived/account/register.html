@@ -4,7 +4,23 @@
 <%def name="title()">Registration</%def>
 <%def name="heading()"><h1>Registration</h1></%def>
 
+${user_exists()}
+
 ${h.form_start(h.url(controller='account', action='register'), method="post")}
     ${fields.body()}
     ${h.field(field=h.submit(value="Submit", name='submit'))}
 ${h.form_end()}
+    
+<%def name="user_exists_print()">
+    <p>Username <b>${c.username}</b> already exists.</p>    
+</%def>    
+    
+<%def name="user_exists()">
+    <%
+        try:
+            c.username
+            user_exists_print()
+        except:
+            pass
+    %>     
+</%def>    
