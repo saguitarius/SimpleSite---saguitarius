@@ -4,7 +4,7 @@ UNDEFINED = runtime.UNDEFINED
 __M_dict_builtin = dict
 __M_locals_builtin = locals
 _magic_number = 5
-_modified_time = 1297970104.4289999
+_modified_time = 1298021513.605
 _template_filename=u'D:\\PyProjects\\SimpleSite\\simplesite\\templates/base/index.html'
 _template_uri=u'/base/index.html'
 _template_cache=cache.Cache(__name__, _modified_time)
@@ -66,45 +66,52 @@ def render_body(context,**pageargs):
             __M_writer(u'">Sign in</a></p>\r\n')
             pass
         # SOURCE LINE 24
+        if h.auth.authorized(h.auth.has_delete_role):
+            # SOURCE LINE 25
+            __M_writer(u'                        <p><a href="')
+            __M_writer(escape(h.url('register')))
+            __M_writer(u'">Registrarion</a></p>\r\n')
+            pass
+        # SOURCE LINE 27
         __M_writer(u'                 </div>\r\n             </div>\r\n            ')
-        # SOURCE LINE 26
+        # SOURCE LINE 29
         __M_writer(escape(self.header()))
         __M_writer(u'\r\n            ')
-        # SOURCE LINE 27
+        # SOURCE LINE 30
         __M_writer(escape(self.tabs()))
         __M_writer(u'\r\n        </div>\r\n        <div id="bd">\r\n            <div id="yui-main">\r\n                <div class="yui-b">\r\n                    ')
-        # SOURCE LINE 32
+        # SOURCE LINE 35
         __M_writer(escape(self.breadcrumbs()))
         __M_writer(u'\r\n                    ')
-        # SOURCE LINE 33
+        # SOURCE LINE 36
         __M_writer(escape(self.flash()))
         __M_writer(u'\r\n                    ')
-        # SOURCE LINE 34
+        # SOURCE LINE 37
         __M_writer(escape(next.body()))
         __M_writer(u'\r\n                </div>\r\n            </div>\r\n            <div class="yui-b">\r\n                 ')
-        # SOURCE LINE 38
+        # SOURCE LINE 41
         __M_writer(escape(self.menu()))
         __M_writer(u'\r\n            </div>\r\n        </div>\r\n        <div id="ft">\r\n            ')
-        # SOURCE LINE 42
+        # SOURCE LINE 45
         __M_writer(escape(self.footer()))
         __M_writer(u'\r\n        </div>\r\n   </div>\r\n</body>\r\n</html>\r\n\r\n')
-        # SOURCE LINE 50
+        # SOURCE LINE 53
         __M_writer(u'\r\n\r\n')
-        # SOURCE LINE 55
+        # SOURCE LINE 58
         __M_writer(u'\r\n\r\n')
-        # SOURCE LINE 59
+        # SOURCE LINE 62
         __M_writer(u'\r\n\r\n')
-        # SOURCE LINE 63
+        # SOURCE LINE 66
         __M_writer(u'\r\n\r\n')
-        # SOURCE LINE 67
+        # SOURCE LINE 70
         __M_writer(u'\r\n\r\n')
-        # SOURCE LINE 71
+        # SOURCE LINE 74
         __M_writer(u'\r\n\r\n')
-        # SOURCE LINE 75
+        # SOURCE LINE 78
         __M_writer(u'\r\n\r\n')
-        # SOURCE LINE 82
+        # SOURCE LINE 85
         __M_writer(u'\r\n\r\n')
-        # SOURCE LINE 92
+        # SOURCE LINE 95
         __M_writer(u'\r\n\r\n')
         return ''
     finally:
@@ -118,12 +125,12 @@ def render_head(context):
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         h = _import_ns.get('h', context.get('h', UNDEFINED))
         __M_writer = context.writer()
-        # SOURCE LINE 52
+        # SOURCE LINE 55
         __M_writer(u'\r\n    ')
-        # SOURCE LINE 53
+        # SOURCE LINE 56
         __M_writer(escape(h.stylesheet_link(h.url('/yui/2.8.2/reset-fonts-grids/reset-fonts-grids.css'))))
         __M_writer(u'\r\n    ')
-        # SOURCE LINE 54
+        # SOURCE LINE 57
         __M_writer(escape(h.stylesheet_link(h.url('/css/main.css'))))
         __M_writer(u'\r\n')
         return ''
@@ -138,21 +145,21 @@ def render_flash(context):
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         session = _import_ns.get('session', context.get('session', UNDEFINED))
         __M_writer = context.writer()
-        # SOURCE LINE 84
+        # SOURCE LINE 87
         __M_writer(u'\r\n')
-        # SOURCE LINE 85
+        # SOURCE LINE 88
         if session.has_key('flash'):
-            # SOURCE LINE 86
+            # SOURCE LINE 89
             __M_writer(u'        <div id="flash"><p>')
             __M_writer(escape(session.get('flash')))
             __M_writer(u'</p></div>\r\n        ')
-            # SOURCE LINE 87
+            # SOURCE LINE 90
 
             del session['flash']
             session.save()
                     
             
-            # SOURCE LINE 90
+            # SOURCE LINE 93
             __M_writer(u'\r\n')
             pass
         return ''
@@ -166,7 +173,7 @@ def render_title(context):
         _import_ns = {}
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         __M_writer = context.writer()
-        # SOURCE LINE 48
+        # SOURCE LINE 51
         __M_writer(u'\r\n    SimpleSite\r\n')
         return ''
     finally:
@@ -180,9 +187,9 @@ def render_tabs(context):
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         navigation = _mako_get_namespace(context, 'navigation')
         __M_writer = context.writer()
-        # SOURCE LINE 61
+        # SOURCE LINE 64
         __M_writer(u'\r\n    ')
-        # SOURCE LINE 62
+        # SOURCE LINE 65
         __M_writer(escape(navigation.tabs()))
         __M_writer(u'\r\n')
         return ''
@@ -197,9 +204,9 @@ def render_menu(context):
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         navigation = _mako_get_namespace(context, 'navigation')
         __M_writer = context.writer()
-        # SOURCE LINE 65
+        # SOURCE LINE 68
         __M_writer(u'\r\n    ')
-        # SOURCE LINE 66
+        # SOURCE LINE 69
         __M_writer(escape(navigation.menu()))
         __M_writer(u'\r\n')
         return ''
@@ -214,9 +221,9 @@ def render_footer(context):
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         h = _import_ns.get('h', context.get('h', UNDEFINED))
         __M_writer = context.writer()
-        # SOURCE LINE 77
+        # SOURCE LINE 80
         __M_writer(u'\r\n    <p>\r\n        <a href="')
-        # SOURCE LINE 79
+        # SOURCE LINE 82
         __M_writer(escape(h.url('/')))
         __M_writer(u'">[Home]</a> |\r\n        <a href="#top">Top ^</a>\r\n    </p>\r\n')
         return ''
@@ -230,7 +237,7 @@ def render_js(context):
         _import_ns = {}
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         __M_writer = context.writer()
-        # SOURCE LINE 94
+        # SOURCE LINE 97
         __M_writer(u'\r\n')
         return ''
     finally:
@@ -243,7 +250,7 @@ def render_header(context):
         _import_ns = {}
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         __M_writer = context.writer()
-        # SOURCE LINE 57
+        # SOURCE LINE 60
         __M_writer(u'\r\n    <a name="top"></a>\r\n')
         return ''
     finally:
@@ -257,9 +264,9 @@ def render_breadcrumbs(context):
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         navigation = _mako_get_namespace(context, 'navigation')
         __M_writer = context.writer()
-        # SOURCE LINE 73
+        # SOURCE LINE 76
         __M_writer(u'\r\n    ')
-        # SOURCE LINE 74
+        # SOURCE LINE 77
         __M_writer(escape(navigation.breadcrumbs()))
         __M_writer(u'\r\n')
         return ''
@@ -274,9 +281,9 @@ def render_heading(context):
         _mako_get_namespace(context, u'navigation')._populate(_import_ns, [u'*'])
         c = _import_ns.get('c', context.get('c', UNDEFINED))
         __M_writer = context.writer()
-        # SOURCE LINE 69
+        # SOURCE LINE 72
         __M_writer(u'\r\n    <h1>')
-        # SOURCE LINE 70
+        # SOURCE LINE 73
         __M_writer(escape(c.heading or 'No Title'))
         __M_writer(u'</h1>\r\n')
         return ''

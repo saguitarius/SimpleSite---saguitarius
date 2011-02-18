@@ -21,6 +21,9 @@
                     % else:
                         <p><a href="${h.url('signin')}">Sign in</a></p>
                     % endif
+                    % if h.auth.authorized(h.auth.has_delete_role):
+                        <p><a href="${h.url('register')}">Registrarion</a></p>
+                    % endif
                  </div>
              </div>
             ${self.header()}

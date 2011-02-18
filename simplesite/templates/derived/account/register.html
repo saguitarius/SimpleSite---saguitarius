@@ -1,7 +1,10 @@
 <%inherit file="/base/index.html"/>
+<%namespace file="fields.html" name="fields" import="*"/>
 
 <%def name="title()">Registration</%def>
 <%def name="heading()"><h1>Registration</h1></%def>
 
-<p>You are signed in as ${request.environ['REMOTE_USER']}.
-<a href="${h.url(controller='account', action='signout')}">Sign out</a></p>
+${h.form_start(h.url(controller='account', action='register'), method="post")}
+    ${fields.body()}
+    ${h.field(field=h.submit(value="Submit", name='submit'))}
+${h.form_end()}
